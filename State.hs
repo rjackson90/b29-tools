@@ -1,15 +1,17 @@
 {-# LANGUAGE OverloadedStrings, DeriveGeneric #-}
 
-module State
-( Altitude (High, Medium, Low)
-, Weather (Good, Poor, Bad)
-, Direction (Inbound, Outbound)
-, Fuel
-, GameState (GameState, altitude, weather, direction, fuel)
-, Dice (val)
-, d6
-, modified_die
-) where
+module State (
+    Altitude(..),
+    Weather(..),
+    Direction(..),
+    Formation(..),
+    Fuel,
+    GameState(..),
+    Crew(..),
+    Dice(val),
+    d6,
+    modified_die
+)where
 
 import Data.Aeson
 import GHC.Generics
@@ -26,6 +28,10 @@ data Direction = Inbound | Outbound deriving (Eq, Show, Generic)
 instance FromJSON Direction
 instance ToJSON Direction
 
+data Formation = In | Disrupted | Out deriving (Eq, Show, Generic)
+instance FromJSON Formation
+instance ToJSON Formation
+
 type Fuel = Int
 
 data GameState = GameState
@@ -33,14 +39,33 @@ data GameState = GameState
     , weather   :: Weather
     , direction :: Direction
     , fuel      :: Fuel
+    , formation :: Formation
     } deriving (Show, Generic)
-
 instance FromJSON GameState
 instance ToJSON GameState
 
+data Crew = Healthy | LightWound | SevereWound | Dead | Absent deriving (Eq, Show, Generic)
+instance FromJSON Crew
+instance ToJSON Crew
+
+{-data CrewManifest = CrewManifest
+    { pilot         :: Crew
+    , copilot       :: Crew
+    , navigator     :: Crew
+    , bombardier    :: Crew
+    , radioman      :: Crew
+    , engineer      :: Crew
+    , radaroperator :: Crew
+    , cfcgunner     :: Crew
+    , leftgunner    :: Crew
+    , rightgunner   :: Crew
+    , tailgunner    :: Crew
+    } deriving (Show, Generic)
+instance FromJSON CrewManifest
+instance ToJSON CrewManifest
+-}
 data Dice = Dice { val :: Int }
     deriving (Eq, Ord, Show, Generic)
-
 instance FromJSON Dice
 instance ToJSON Dice
 

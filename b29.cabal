@@ -1,0 +1,27 @@
+name:           b29-helper
+version:        0.0.1
+synopsis:       A simple webapp to remove some of the tedium from playing the game B-29 Superfortress
+homepage:       https://github.com/rjackson90/hB29
+license:        AllRightsReserved
+author:         Richard Jackson
+maintainer:     rjackson90@gmail.com
+category:       Web
+build-type:     Simple
+cabal-version:  >=1.8
+
+executable b29-helper
+    main-is:        Main.hs
+    build-depends:  base
+                  , wai
+                  , warp
+                  , http-types
+                  , resourcet
+                  , scotty
+                  , text
+                  , bytestring
+                  , blaze-html
+                  , wai-middleware-static
+                  , wai-extra
+                  , time
+                  , aeson
+                  , transformers
