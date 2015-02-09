@@ -25,3 +25,4 @@ executable b29-helper
                   , time
                   , aeson
                   , transformers
+                  , mtl

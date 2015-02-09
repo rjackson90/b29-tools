@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:ng="http://angularjs.org" ng-app="b29HelperApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Just a Crappy Website!</title>
+        
+        <!-- JQuery, required by Bootstrap -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+        </script>       
+        
+        <!-- Bootstrap -->
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" 
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    </head>
+    <body ng-controller="ChartCtrl">
+        <center>
+            <h1>B-29 Superfortress: Bombers Over Japan 1944-1945</h1>
+            <h2>Game design by Steve Dixon and Shawn Rife</h2>
+        </center>
+        
+        <p>This app is meant to automate some of the more tedious parts of playing B-29. Select a
+        chart from the list below to automatically interpret your die rolls using information about
+        the game state which you supply. </p>
+        <ul>
+            <li ng-repeat="chart in charts">
+                <span>Chart <a href="{{chart.link}}">{{chart.number}}: {{chart.name}}</a></span>
+                <p>{{chart.instructions}}</p>
+            </li>
+        </ul>
+
+        <!-- Angular.js is the last tag in Body for better loading times -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script>
+
+        <!-- App components -->
+        <script src="static/app/view/controller.js"></script>
+    </body>
+</html>
+

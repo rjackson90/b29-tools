@@ -13,6 +13,6 @@ main = scotty 3000 $ do
     
     -- Routes
     get "/" $ index
-    get "/state" $ defaultState
-    post "/charts/4-2" $ chart42
+    get "/charts/4-2" $ getWeatherInZone
+    get "/charts/4-3" $ getBadWeatherImpact
     notFound $ error404

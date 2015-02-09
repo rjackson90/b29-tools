@@ -5,8 +5,10 @@ module Result where
 import qualified Data.Aeson as A
 import GHC.Generics
 import Data.Text
+import Control.Monad.Writer.Lazy
+import Data.Functor.Identity
 
-data Severity = VeryPos | Pos | Neutral | Neg | VeryNeg deriving(Eq, Show, Generic)
+data Severity = VeryPos | Pos | Neutral | Neg | VeryNeg deriving(Eq, Show, Generic, Bounded, Enum)
 instance A.FromJSON Severity
 instance A.ToJSON Severity
 
@@ -15,18 +17,11 @@ instance A.FromJSON ResultKind
 instance A.ToJSON ResultKind
 
 data Result = Result 
-    { severity :: Severity
-    , kind :: ResultKind
-    , msgs :: [Text]
+    { kind :: ResultKind
+    , severity :: Severity
+    , msg :: Text
     } deriving (Show, Generic)
 instance A.FromJSON Result
 instance A.ToJSON Result
 
-result :: ResultKind -> Severity -> Text -> Result
-result kind sev msg = Result 
-                        { severity = sev
-                        , kind = kind
-                        , msgs = [msg] }
-
-appendMsg :: Text -> Result -> Result
-appendMsg msg res = res { msgs = msgs res ++ [msg] }
+type ResultWriter = WriterT [Result] Identity
