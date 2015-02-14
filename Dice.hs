@@ -14,7 +14,7 @@ data Dice = Dice { val :: Int }
 instance FromJSON Dice
 instance ToJSON Dice
 
-d6 :: Int -> Int-> Maybe Dice
+d6 :: Int -> Int -> Maybe Dice
 d6 dice_count value
     | value >= dice_count && value <= 6 * dice_count = Just (Dice value)
     | otherwise = Nothing

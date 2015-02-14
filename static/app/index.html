@@ -27,8 +27,34 @@
         the game state which you supply. </p>
         <ul>
             <li ng-repeat="chart in charts">
-                <span>Chart <a href="{{chart.link}}">{{chart.number}}: {{chart.name}}</a></span>
-                <p>{{chart.instructions}}</p>
+                <div>
+                    <span>Chart <a href="{{chart.link}}">{{chart.number}}: {{chart.name}}</a></span>
+                    <p>{{chart.instructions}}</p>
+                </div>
+                <div ng-controller="WeatherInZoneCtrl">
+                    <form name="weatherStateForm">
+                        Weather: <select ng-model="state.weather" 
+                                         ng-options="opt for opt in weather_choices"></select>
+                        Altitude: <select ng-model="state.altitude"
+                                          ng-options="opt for opt in altitude_choices"></select>
+                        Fuel: <input type="number" min="0" max="48" value="32" ng-model="state.fuel"/>
+                        Direction: <select ng-model="state.direction"
+                                           ng-options="opt for opt in direction_choices"></select>
+                        Die roll: <input type="number" min="2" max="12" ng-model="dice" />
+                        <input type="button" ng-click="reset()" value="Reset" />
+                        <input type="submit" ng-click="submit()" value="Submit" />
+                    </form>
+                    <pre>state = {{state | json}}</pre>
+                    <pre>dice = {{dice | json}}</pre>
+                    <pre>new state = {{newState | json}}</pre>
+                    <pre>results =
+                    <ul>
+                        <li ng-repeat="result in results">
+                            {{result.severity}}: {{result.msg}}
+                        </li>
+                    </ul>
+                    </pre>
+                </div>
             </li>
         </ul>
 

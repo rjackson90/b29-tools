@@ -3,6 +3,9 @@
 # Symlink to executable
 b29-helper
 
+# Sandbox executable
+dummy
+
 ### Haskell ###
 dist
 cabal-dev

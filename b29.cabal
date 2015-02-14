@@ -1,5 +1,5 @@
 name:           b29-helper
-version:        0.0.1
+version:        0.1.0
 synopsis:       A simple webapp to remove some of the tedium from playing the game B-29 Superfortress
 homepage:       https://github.com/rjackson90/hB29
 license:        AllRightsReserved
