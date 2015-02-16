@@ -49,7 +49,7 @@ instance Chart WeatherInZone where
             tell [Result Game VeryNeg "Roll on Table 4-3 to determine the impact of flying through\
                                       \ bad weather"]
             jet_stream state { weather = Bad }
-        | mod == 12 = do
+        | mod >= 12 = do
             tell [Result Game VeryNeg "Bad Weather"]
             tell [Result Game VeryNeg "Roll on Table 4-3 to determine the impact of flying through\
                                       \ bad weather"]
