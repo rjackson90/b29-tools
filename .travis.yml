@@ -6,7 +6,7 @@ addons:
 after_success:
 - chmod 600 .travis/bombersapp.pem
 - ssh-add .travis/bombersapp.pem
-- git remote add production bombersapp@rcjsoftware.com:b29.git
+- git remote add production bombersapp@rcjsoftware.com:/~bombersapp/b29.git
 - git push production dev
 - scp dist/build/b29-helper/b29-helper bombersapp@rcjsoftware.com:hB29
 before_install:
