@@ -1,8 +1,11 @@
 language: haskell
 ghc: 7.8
 install: cabal install --only-dependencies --enable-tests --force-reinstalls
+addons:
+    ssh_known_hosts: rcjsoftware.com
 after_success:
 - chmod 600 .travis/bombersapp.pem
+- exec ssh-agent bash
 - ssh-add .travis/bombersapp.pem
 - git remote add production bombersapp@rcjsoftware.com:b29.git
 - git push production dev
