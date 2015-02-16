@@ -1,4 +1,12 @@
 language: haskell
 ghc: 7.8
-
 install: cabal install --only-dependencies --enable-tests --force-reinstalls
+after_success:
+- chmod 600 .travis/bombersapp.pem
+- ssh-add .travis/bombersapp.pem
+- git remote add production bombersapp@rcjsoftware.com:b29.git
+- git push production dev
+- scp dist/build/b29-helper/b29-helper bombersapp@rcjsoftware.com:hB29
+before_install:
+- openssl aes-256-cbc -K $encrypted_e0c423148da7_key -iv $encrypted_e0c423148da7_iv
+  -in bombersapp.pem.enc -out .travis/bombersapp.pem -d
