@@ -1,11 +1,21 @@
-var b29HelperApp = angular.module('b29HelperApp', []);
+var chartControllers = angular.module('chartControllers', []);
 
-b29HelperApp.controller('ChartCtrl', function ($scope, $http) {
-    $http.get('/charts/list.json').success(function(data) {
-        $scope.charts = data;
-    });
-});
+chartControllers.controller('ChartListCtrl', ['$scope', '$http',
+    function ($scope, $http) {
+        $http.get('api/charts/list.json').success(function(data) {
+            $scope.charts = data;
+        });
+    }
+]);
 
+chartControllers.controller('ChartDetailCtrl', ['$scope', '$routeParams',
+    function ($scope, $routeParams) {
+        $scope.chartId = $routeParams.chartId;
+    }
+]);
+
+
+/*
 b29HelperApp.controller('WeatherInZoneCtrl', function($scope, $http) {
     $scope.weather_choices = ["Good", "Poor", "Bad"];
     $scope.altitude_choices = ["High", "Medium", "Low"];
@@ -41,3 +51,4 @@ b29HelperApp.controller('WeatherInZoneCtrl', function($scope, $http) {
             });
     };
 });
+*/

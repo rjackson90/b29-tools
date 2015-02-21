@@ -28,7 +28,7 @@ defaultWeatherInZone :: WeatherInZone
 defaultWeatherInZone = WeatherInZone Good Low 32 Outbound
 
 instance Chart WeatherInZone where
-    get _ = ChartDescriptor "4-2" "Weather in Zone" instructions "/charts/4-2"
+    get _ = ChartDescriptor "4-2" "Weather in Zone" instructions "/#/charts/4-2"
         where instructions = "The first chart to roll on when doing a Weather Check. Roll 2d6."
 
     post state dice
@@ -95,7 +95,7 @@ defaultBadWeatherImpact :: BadWeatherImpact
 defaultBadWeatherImpact = BadWeatherImpact In False Healthy False
 
 instance Chart BadWeatherImpact where
-    get _ = ChartDescriptor "4-3" "Impact of Bad Weather" instructions "/charts/4-3"
+    get _ = ChartDescriptor "4-3" "Impact of Bad Weather" instructions "/#/charts/4-3"
         where instructions = "Roll on this chart if the result from 4-2 was 'Bad'. Roll 1d6"
 
     post state dice 

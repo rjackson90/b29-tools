@@ -17,17 +17,17 @@ main = scotty 3000 $ do
     middleware $ gzip $ def { gzipFiles = GzipCompress }
     
     -- Routes
-    get "/" $ index
+    get "/" $ index     -- Only for development testing!
 
-    get "/charts/list.json" listCharts
-    get "/charts/:chart" getChart
+    get "/api/charts/list.json" listCharts
+    get "/api/charts/:chart" getChart
 
-    post "/charts/4-2" $ do
+    post "/api/charts/4-2" $ do
         request <- body
         let maybeRequest = decodeRequest request :: Maybe (WeatherInZone, Int)
         postChart maybeRequest 2
 
-    post "/charts/4-3" $ do
+    post "/api/charts/4-3" $ do
         request <- body
         let maybeRequest = decodeRequest request :: Maybe (BadWeatherImpact, Int)
         postChart maybeRequest 1

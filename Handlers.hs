@@ -21,7 +21,7 @@ import Dice
 index :: ActionM ()
 index = do
     setHeader "Content-Type" "text/html"
-    file "./static/app/index.html"
+    file "./static/index.html"
 
 chartList :: [Text]
 chartList = ["4-2", "4-3"]
@@ -72,6 +72,6 @@ postChart maybeRequest numDice = do
 
 error404 :: ActionM ()
 error404 = do
-    setHeader "Content-Type" "text/html"
-    file "./static/404.html"
+    setHeader "Content-Type" "application/json"
+    json $ A.object ["reason" A..= ("Endpoint does not exist" :: Text)]
     status notFound404
