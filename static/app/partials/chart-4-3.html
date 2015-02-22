@@ -1,0 +1,14 @@
+<p>Chart 4-3: Impact of Bad Weather</p>
+<form>
+    Formation Status: <select ng-model="form.form"
+                              ng-options="opt for opt in formation_choices"></select>
+    Radar is inoperable: <input type="checkbox" ng-model="form.radarBroken" 
+                                                ng-true-value="true" ng-false-value="false"/>
+    Radar Operator Status: <select ng-model="form.radarOperator"
+                                   ng-options="opt for opt in crew_choices"></select>
+    Extra fuel spent: <input type="checkbox" ng-model="form.fuelSpent"
+                                             ng-true-value="true" ng-false-value="false" />
+    Die roll: <input type="number" min="1" max="6" ng-model="form.dice" />
+    <input type="button" ng-click="reset()" value="Reset" />
+    <input type="submit" ng-click="submit('4-3')" value="Submit" />
+</form>

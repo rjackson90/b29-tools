@@ -31,7 +31,7 @@
         chart from the list below to automatically interpret your die rolls using information about
         the game state which you supply. </p>
         
-                
+        <!-- The main grid, small sidebar on left, large body fill on the right -->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2">
@@ -45,9 +45,37 @@
                         </li>
                     </ul>
                 </div>
+                
                 <div class="col-md-10">
                     <!-- Body -->
-                    <div ng-view></div>
+                    <div class="container-fluid" ng-controller="ChartDetailCtrl">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <!-- Input pane -->
+                                <center><h3>Chart Input</h3></center>
+                                <div ng-view></div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <!-- Extra Information pane (maybe some kind of cool picture?) -->
+                                <center><h3>Room for expansion</h3></center>
+                                <p>Extra cool stuff goes here, like maybe a picture of the plane???
+                                   Who knows, the possibilities are endless!</p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <!-- Results pane -->
+                                <center><h3>Results</h3></center>
+                                <ul>
+                                    <li ng-repeat="result in results">
+                                        <span class="label {{severityAsLabel(result.severity)}}">
+                                            {{result.msg}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

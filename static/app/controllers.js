@@ -1,4 +1,4 @@
-var chartControllers = angular.module('chartControllers', []);
+var chartControllers = angular.module('chartControllers', ['ngRoute']);
 
 chartControllers.controller('ChartListCtrl', ['$scope', '$http',
     function ($scope, $http) {
@@ -8,9 +8,55 @@ chartControllers.controller('ChartListCtrl', ['$scope', '$http',
     }
 ]);
 
-chartControllers.controller('ChartDetailCtrl', ['$scope', '$routeParams',
-    function ($scope, $routeParams) {
-        $scope.chartId = $routeParams.chartId;
+chartControllers.controller('ChartDetailCtrl', ['$scope', '$http',
+    function ($scope, $http) {
+        $scope.weather_choices = ["Good", "Poor", "Bad"];
+        $scope.altitude_choices = ["High", "Medium", "Low"];
+        $scope.direction_choices = ["Inbound", "Outbound"];
+        $scope.formation_choices = ["In", "Disrupted", "Out"];
+        $scope.crew_choices = ["Healthy", "LightWound", "SevereWound", "Dead", "Absent"];
+
+        $scope.master = {};
+
+        $scope.update = function(state) {
+            $scope.master = angular.copy(form);
+        };
+
+        $scope.reset = function() {
+            $scope.form = angular.copy($scope.master);
+        };
+
+        $scope.reset();
+ 
+        $scope.severityAsLabel = function(severity) {
+            var map = {
+                'VeryNeg':'label-danger',
+                'Neg':'label-warning',
+                'Neutral':'label-info',
+                'Pos':'label-success',
+                'VeryPos':'label-primary'
+            };
+            if( severity in map ) {
+                return map[severity];
+            } else {
+                return 'label-default';
+            }
+        };
+
+        $scope.submit = function(chartId) {
+            console.log("Passed chartId: "+chartId);
+            request = {'state':$scope.form, 'roll':$scope.form['dice']};
+            console.log(request);
+            $http.post('/api/charts/'+chartId, request).
+                success(function(data, status, headers, config) {
+                    console.log("POST success");
+                    $scope.newState = data.newState;
+                    $scope.results = data.results;
+                }).
+                error(function(data, status, headers, config) {
+                    console.log("POST failure!");
+                });
+        };
     }
 ]);
 

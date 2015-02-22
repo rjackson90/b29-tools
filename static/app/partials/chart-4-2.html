@@ -1,0 +1,13 @@
+<p>Chart 4-2({{chartId}}): Weather In Zone</p>
+<form>
+    Weather: <select ng-model="form.weather"
+                     ng-options="opt for opt in weather_choices"></select>
+    Altitude: <select ng-model="form.altitude"
+                      ng-options="opt for opt in altitude_choices"></select>
+    Fuel: <input type="number" min="0" max="48" value="32" ng-model="form.fuel"/>
+    Direction: <select ng-model="form.direction"
+                       ng-options="opt for opt in direction_choices"></select>
+    Die roll: <input type="number" min="2" max="12" ng-model="form.dice" />
+    <input type="button" ng-click="reset()" value="Reset" />
+    <input type="submit" ng-click="submit('4-2')" value="Submit" />
+</form>
